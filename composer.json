@@ -1,0 +1,25 @@
+{
+    "name": "bithive/globalpayments-sdk",
+    "description": "SDK Helper Global Payments integration",
+    "type": "library",
+    "require": {
+        "econea/nusoap": "^0.9.10",
+        "php" : "^7.2"
+    },
+    "require-dev": {
+        "econea/nusoap": "^0.9.10",
+        "php" : "^7.2"
+    },
+    "authors": [
+        {
+            "name": "Adriano Souza",
+            "email": "adrianoosouza@protonmail.ch"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "GlobalPayments\\" : ""
+        }
+    },
+    "minimum-stability": "dev"
+}
