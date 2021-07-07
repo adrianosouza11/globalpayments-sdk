@@ -1,6 +1,6 @@
 <?php
 
-namespace GlobalPayments\util;
+namespace GlobalPayments\Util;
 
 abstract class Utilities
 {

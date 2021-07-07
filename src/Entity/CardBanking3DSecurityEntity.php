@@ -1,9 +1,9 @@
 <?php
 
-namespace GlobalPayments\entities;
+namespace GlobalPayments\Entity;
 
-use GlobalPayments\enum\CurrencyEnum;
-use GlobalPayments\enum\TransactionTypeEnum;
+use GlobalPayments\Enum\CurrencyEnum;
+use GlobalPayments\Enum\TransactionTypeEnum;
 
 class CardBanking3DSecurityEntity extends CardBankingEntity
 {

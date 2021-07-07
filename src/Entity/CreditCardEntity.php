@@ -1,8 +1,8 @@
 <?php
 
-namespace GlobalPayments\entities;
+namespace GlobalPayments\Entity;
 
-use GlobalPayments\enum\PaymentMethodEnum;
+use GlobalPayments\Enum\PaymentMethodEnum;
 
 /**
  * Class CreditCardEntity

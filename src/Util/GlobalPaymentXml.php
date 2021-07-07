@@ -1,10 +1,10 @@
 <?php
 
-namespace GlobalPayments\util;
+namespace GlobalPayments\Util;
 
-use GlobalPayments\entities\CardBanking3DSecurityEntity;
-use GlobalPayments\entities\CardBankingEntity;
-use GlobalPayments\entities\OneClickBankingEntity;
+use GlobalPayments\Entity\CardBanking3DSecurityEntity;
+use GlobalPayments\Entity\CardBankingEntity;
+use GlobalPayments\Entity\OneClickBankingEntity;
 
 /**
  * Class GlobalPaymentXml
@@ -93,7 +93,7 @@ abstract class GlobalPaymentXml
                             <DS_MERCHANT_CURRENCY>%s</DS_MERCHANT_CURRENCY>
                             <DS_MERCHANT_PAN>%d</DS_MERCHANT_PAN>
                             <DS_MERCHANT_EXPIRYDATE>%d</DS_MERCHANT_EXPIRYDATE>
-                            <DS_MERCHANT_CVV2>%d</DS_MERCHANT_CVV2>
+                            <DS_MERCHANT_CVV2>%s</DS_MERCHANT_CVV2>
                             <DS_MERCHANT_TRANSACTIONTYPE>%s</DS_MERCHANT_TRANSACTIONTYPE>
                             <DS_MERCHANT_ACCOUNTTYPE>%s</DS_MERCHANT_ACCOUNTTYPE>
                             <DS_MERCHANT_PLANTYPE>%d</DS_MERCHANT_PLANTYPE>",

@@ -1,6 +1,6 @@
 <?php
 
-namespace GlobalPayments\entities;
+namespace GlobalPayments\Entity;
 
 class CardEntity {
     /**

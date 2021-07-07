@@ -1,8 +1,8 @@
 <?php
 
-namespace GlobalPayments\util;
+namespace GlobalPayments\Util;
 
-use GlobalPayments\exceptions\GlobalPaymentException;
+use GlobalPayments\Exception\GlobalPaymentException;
 
 /**
  * Class GlobalPaymentErrorCodes

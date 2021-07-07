@@ -1,58 +1,60 @@
 <?php
 
-namespace GlobalPayments\entities;
+namespace GlobalPayments\Entity;
 
 use GlobalPayments\enum\CurrencyEnum;
 use GlobalPayments\enum\TransactionTypeEnum;
 use GlobalPayments\util\Utilities;
 
-class CardBankingEntity
+class OneClickBankingEntity
 {
     /**
-     * @var int
+     * @var int $amount
      */
-    protected $amount = 0;
+    protected $amount;
 
     /**
-     * @var string
+     * @var string $order_code
      */
-    protected $order_code = '';
+    protected $order_code;
 
     /**
-     * @var int $paymentPlan;
+     * @var int $payment_plan
      */
-    protected $paymentPlan;
+    protected $payment_plan;
 
     /**
-     * @var int $transactionType
+     * @var int $transaction_type
      */
-    protected $transactionType;
+    protected $transaction_type;
 
     /**
-     * @var int $currency;
+     * @var int $currency
      */
     protected $currency;
 
     /**
-     * @var CardEntity $cardEntity
+     * @var CardOneClickEntity $cardOneClick
      */
-    protected $cardEntity;
+    protected $cardOneClick;
 
     /**
-     * CardBankingEntity constructor.
+     * OneClickBankingEntity constructor.
      * @param int $amount
      * @param string $order_code
-     * @param CardEntity $cardEntity
-     * @param int $paymentPlan
+     * @param int $payment_plan
+     * @param int $transaction_type
      * @param int $currency
+     * @param CardOneClickEntity $cardOneClick
      */
-    public function __construct($amount, $order_code,CardEntity $cardEntity,$paymentPlan, $currency = CurrencyEnum::CURRENCY_BRAZIL)
+    public function __construct($amount, $order_code, $payment_plan,CardOneClickEntity $cardOneClick,$currency = CurrencyEnum::CURRENCY_BRAZIL)
     {
         $this->order_code = $order_code;
-        $this->cardEntity = $cardEntity;
-        $this->paymentPlan = $paymentPlan;
-        $this->transactionType = TransactionTypeEnum::AUTHORIZATION;
+        $this->payment_plan = $payment_plan;
+        $this->transaction_type = TransactionTypeEnum::AUTHORIZATION;
         $this->currency = $currency;
+        $this->cardOneClick = $cardOneClick;
+
         $this->setAmountFormatCurrency($amount);
     }
 
@@ -92,35 +94,19 @@ class CardBankingEntity
     }
 
     /**
-     * @return CardEntity
-     */
-    public function getCardEntity()
-    {
-        return $this->cardEntity;
-    }
-
-    /**
-     * @param CardEntity $cardEntity
-     */
-    public function setCardEntity($cardEntity)
-    {
-        $this->cardEntity = $cardEntity;
-    }
-
-    /**
      * @return int
      */
     public function getPaymentPlan()
     {
-        return $this->paymentPlan;
+        return $this->payment_plan;
     }
 
     /**
-     * @param int $paymentPlan
+     * @param int $payment_plan
      */
-    public function setPaymentPlan($paymentPlan)
+    public function setPaymentPlan($payment_plan)
     {
-        $this->paymentPlan = $paymentPlan;
+        $this->payment_plan = $payment_plan;
     }
 
     /**
@@ -128,15 +114,15 @@ class CardBankingEntity
      */
     public function getTransactionType()
     {
-        return $this->transactionType;
+        return $this->transaction_type;
     }
 
     /**
-     * @param int $transactionType
+     * @param int $transaction_type
      */
-    public function setTransactionType($transactionType)
+    public function setTransactionType($transaction_type)
     {
-        $this->transactionType = $transactionType;
+        $this->transaction_type = $transaction_type;
     }
 
     /**
@@ -153,5 +139,13 @@ class CardBankingEntity
     public function setCurrency($currency)
     {
         $this->currency = $currency;
+    }
+
+    /**
+     * @return CardOneClickEntity
+     */
+    public function getCardOneClick()
+    {
+        return $this->cardOneClick;
     }
 }

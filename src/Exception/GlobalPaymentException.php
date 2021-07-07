@@ -1,6 +1,6 @@
 <?php
 
-namespace GlobalPayments\exceptions;
+namespace GlobalPayments\Exception;
 
 use Throwable;
 

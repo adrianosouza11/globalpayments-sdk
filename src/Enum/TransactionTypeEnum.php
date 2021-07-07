@@ -1,7 +1,7 @@
 <?php
 
 
-namespace GlobalPayments\enum;
+namespace GlobalPayments\Enum;
 
 
 abstract class TransactionTypeEnum

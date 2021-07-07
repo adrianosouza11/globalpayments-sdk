@@ -1,7 +1,7 @@
 <?php
 
 
-namespace GlobalPayments\entities;
+namespace GlobalPayments\Entity;
 
 /**
  * Class CardOneClickEntity
