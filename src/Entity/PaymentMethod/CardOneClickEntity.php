@@ -1,12 +1,7 @@
 <?php
 
+namespace GlobalPayments\Entity\PaymentMethod;
 
-namespace GlobalPayments\Entity;
-
-/**
- * Class CardOneClickEntity
- * @package common\components\services\globalpayment\entities
- */
 class CardOneClickEntity
 {
     /**
@@ -18,7 +13,7 @@ class CardOneClickEntity
      * CardOneClickEntity constructor.
      * @param string $one_click_pay_token
      */
-    public function __construct($one_click_pay_token)
+    public function __construct(string $one_click_pay_token)
     {
         $this->one_click_pay_token = $one_click_pay_token;
     }
@@ -26,7 +21,7 @@ class CardOneClickEntity
     /**
      * @return string
      */
-    public function getOneClickPayToken()
+    public function getOneClickPayToken() : string
     {
         return $this->one_click_pay_token;
     }
@@ -34,7 +29,7 @@ class CardOneClickEntity
     /**
      * @param string $one_click_pay_token
      */
-    public function setOneClickPayToken($one_click_pay_token)
+    public function setOneClickPayToken(string $one_click_pay_token) : void
     {
         $this->one_click_pay_token = $one_click_pay_token;
     }

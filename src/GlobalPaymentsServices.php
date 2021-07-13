@@ -2,11 +2,11 @@
 
 namespace GlobalPayments;
 
-use GlobalPayments\BankLog\entities\BankTransactionLog;
-use GlobalPayments\BankLog\enum\StatusLog;
+use GlobalPayments\BankLog\Entity\BankTransactionLog;
+use GlobalPayments\BankLog\Enum\StatusLog;
 use GlobalPayments\BankLog\TransactionLog;
-use GlobalPayments\Entity\CardBankingEntity;
-use GlobalPayments\Entity\OneClickBankingEntity;
+use GlobalPayments\Entity\Banking\CardBankingEntity;
+use GlobalPayments\Entity\Banking\OneClickBankingEntity;
 use GlobalPayments\Exception\GlobalPaymentException;
 use GlobalPayments\Soap\Client;
 use GlobalPayments\Traits\GlobalPaymentsServicesTrait;
@@ -123,5 +123,44 @@ class GlobalPaymentsServices
         ));
 
         return Client::doRequest($this->getUrl(), $getXml);
+    }
+
+    public function recurringCreditCardPayment(CardBankingEntity $cardBankingEntity) : array
+    {
+        $security_key = Utilities::generateSecurityKey(
+            $cardBankingEntity->getAmount(),
+            $cardBankingEntity->getOrderCode(),
+            $this->getMid(),
+            $cardBankingEntity->getCurrency(),
+            $cardBankingEntity->getCardEntity()->getCardNumber(),
+            null,
+            $cardBankingEntity->getTransactionType(),
+            $this->getKey(),
+            null
+        );
+
+        $getXml = GlobalPaymentXml::getXmlRecurringCredit(
+            $cardBankingEntity,
+            $this->getMid(),
+            $this->getTerminal(),
+            $security_key
+        );
+
+        $xmlReqArray = Utilities::xmlArray(new \SimpleXMLElement($getXml));
+
+        $obfuscateDataXml = Utilities::obfuscateDataXml($xmlReqArray,[
+            'DS_MERCHANT_PAN',
+            'DS_MERCHANT_EXPIRYDATE',
+            'DS_MERCHANT_MERCHANTSIGNATURE'
+        ]);
+
+        $this->transactionLog->addLog(new BankTransactionLog(
+            $cardBankingEntity->getOrderCode(),
+            "Efetuando transação com cartão de crédito recorrente",
+            StatusLog::LOG,
+            $obfuscateDataXml
+        ));
+
+        return Client::doRequest($this->getUrl(),$getXml);
     }
 }

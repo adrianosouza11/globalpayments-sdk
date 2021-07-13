@@ -1,13 +1,9 @@
 <?php
 
-namespace GlobalPayments\Entity;
+namespace GlobalPayments\Entity\PaymentMethod;
 
 use GlobalPayments\Enum\PaymentMethodEnum;
 
-/**
- * Class CreditCardEntity
- * @package common\components\services\globalpayment\entities
- */
 class CreditCardEntity extends CardEntity
 {
     /**
@@ -22,36 +18,39 @@ class CreditCardEntity extends CardEntity
 
     /**
      * CreditCardEntity constructor.
-     * @param $titular_name
-     * @param $card_number
-     * @param $expirate_date
-     * @param $cvv2
-     * @param $number_installments
+     * @param string $titular_name
+     * @param string $card_number
+     * @param string $expiry_date
+     * @param string $cvv2
+     * @param int $number_installments
      */
-    public function __construct($titular_name, $card_number, $expirate_date, $cvv2, $number_installments)
+    public function __construct(string $titular_name,string $card_number,string $expiry_date,string $cvv2 = null, int $number_installments)
     {
-        parent::__construct($titular_name, $card_number, $expirate_date, $cvv2);
+        parent::__construct($titular_name, $card_number, $expiry_date, $cvv2);
         $this->number_installments = $number_installments;
     }
 
     /**
      * @return string
      */
-    public function getOperationType(){
+    public function getOperationType() : string
+    {
         return $this->operation_type;
     }
 
     /**
      * @param int $number_installments
      */
-    public function setNumberInstallments($number_installments){
+    public function setNumberInstallments(int $number_installments) : void
+    {
         $this->number_installments = $number_installments;
     }
 
     /**
      * @return int
      */
-    public function getNumberInstallments(){
+    public function getNumberInstallments() : int
+    {
         return $this->number_installments;
     }
 }

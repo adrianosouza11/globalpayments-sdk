@@ -1,6 +1,6 @@
 <?php
 
-namespace GlobalPayments\BankLog\entities;
+namespace GlobalPayments\BankLog\Entity;
 
 class BankTransactionLog
 {

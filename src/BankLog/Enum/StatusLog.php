@@ -1,7 +1,7 @@
 <?php
 
 
-namespace GlobalPayments\BankLog\enum;
+namespace GlobalPayments\BankLog\Enum;
 
 
 abstract class StatusLog

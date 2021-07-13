@@ -1,7 +1,7 @@
 <?php
 
 
-namespace GlobalPayments\Entity;
+namespace GlobalPayments\Entity\PaymentMethod;
 
 use GlobalPayments\Enum\PaymentMethodEnum;
 

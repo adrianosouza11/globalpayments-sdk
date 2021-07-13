@@ -1,7 +1,8 @@
 <?php
 
-namespace GlobalPayments\Entity;
+namespace GlobalPayments\Entity\Banking;
 
+use GlobalPayments\Entity\PaymentMethod\CardEntity;
 use GlobalPayments\Enum\CurrencyEnum;
 use GlobalPayments\Enum\TransactionTypeEnum;
 use GlobalPayments\Util\Utilities;
@@ -9,7 +10,7 @@ use GlobalPayments\Util\Utilities;
 class CardBankingEntity
 {
     /**
-     * @var int
+     * @var float
      */
     protected $amount = 0;
 
@@ -24,7 +25,7 @@ class CardBankingEntity
     protected $paymentPlan;
 
     /**
-     * @var int $transactionType
+     * @var string $transactionType
      */
     protected $transactionType;
 
@@ -40,13 +41,19 @@ class CardBankingEntity
 
     /**
      * CardBankingEntity constructor.
-     * @param int $amount
+     * @param float $amount
      * @param string $order_code
      * @param CardEntity $cardEntity
      * @param int $paymentPlan
      * @param int $currency
      */
-    public function __construct($amount, $order_code,CardEntity $cardEntity,$paymentPlan, $currency = CurrencyEnum::CURRENCY_BRAZIL)
+    public function __construct(
+        float $amount,
+        string $order_code,
+        CardEntity $cardEntity,
+        int $paymentPlan,
+        int $currency = CurrencyEnum::CURRENCY_BRAZIL
+    )
     {
         $this->order_code = $order_code;
         $this->cardEntity = $cardEntity;
@@ -57,17 +64,17 @@ class CardBankingEntity
     }
 
     /**
-     * @return int
+     * @return float
      */
-    public function getAmount()
+    public function getAmount() : float
     {
         return $this->amount;
     }
 
     /**
-     * @param int $amount
+     * @param float $amount
      */
-    public function setAmountFormatCurrency($amount)
+    public function setAmountFormatCurrency(float $amount) : void
     {
         if ($this->currency == CurrencyEnum::CURRENCY_BRAZIL)
             $this->amount = Utilities::formatRealCurrencyValue($amount);
@@ -78,7 +85,7 @@ class CardBankingEntity
     /**
      * @return string
      */
-    public function getOrderCode()
+    public function getOrderCode() : string
     {
         return $this->order_code;
     }
@@ -86,7 +93,7 @@ class CardBankingEntity
     /**
      * @param string $order_code
      */
-    public function setOrderCode($order_code)
+    public function setOrderCode(string $order_code) : void
     {
         $this->order_code = $order_code;
     }
@@ -94,23 +101,15 @@ class CardBankingEntity
     /**
      * @return CardEntity
      */
-    public function getCardEntity()
+    public function getCardEntity() : CardEntity
     {
         return $this->cardEntity;
     }
 
     /**
-     * @param CardEntity $cardEntity
-     */
-    public function setCardEntity($cardEntity)
-    {
-        $this->cardEntity = $cardEntity;
-    }
-
-    /**
      * @return int
      */
-    public function getPaymentPlan()
+    public function getPaymentPlan() : int
     {
         return $this->paymentPlan;
     }
@@ -118,7 +117,7 @@ class CardBankingEntity
     /**
      * @param int $paymentPlan
      */
-    public function setPaymentPlan($paymentPlan)
+    public function setPaymentPlan(int $paymentPlan) : void
     {
         $this->paymentPlan = $paymentPlan;
     }
@@ -126,15 +125,15 @@ class CardBankingEntity
     /**
      * @return int
      */
-    public function getTransactionType()
+    public function getTransactionType() : string
     {
         return $this->transactionType;
     }
 
     /**
-     * @param int $transactionType
+     * @param string $transactionType
      */
-    public function setTransactionType($transactionType)
+    public function setTransactionType(string $transactionType) : void
     {
         $this->transactionType = $transactionType;
     }
@@ -142,7 +141,7 @@ class CardBankingEntity
     /**
      * @return int
      */
-    public function getCurrency()
+    public function getCurrency() : int
     {
         return $this->currency;
     }
@@ -150,7 +149,7 @@ class CardBankingEntity
     /**
      * @param int $currency
      */
-    public function setCurrency($currency)
+    public function setCurrency(int $currency) : void
     {
         $this->currency = $currency;
     }

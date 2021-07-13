@@ -1,15 +1,16 @@
 <?php
 
-namespace GlobalPayments\Entity;
+namespace GlobalPayments\Entity\Banking;
 
-use GlobalPayments\enum\CurrencyEnum;
-use GlobalPayments\enum\TransactionTypeEnum;
-use GlobalPayments\util\Utilities;
+use GlobalPayments\Entity\PaymentMethod\CardOneClickEntity;
+use GlobalPayments\Enum\CurrencyEnum;
+use GlobalPayments\Enum\TransactionTypeEnum;
+use GlobalPayments\Util\Utilities;
 
 class OneClickBankingEntity
 {
     /**
-     * @var int $amount
+     * @var float $amount
      */
     protected $amount;
 
@@ -24,7 +25,7 @@ class OneClickBankingEntity
     protected $payment_plan;
 
     /**
-     * @var int $transaction_type
+     * @var string $transaction_type
      */
     protected $transaction_type;
 
@@ -40,14 +41,19 @@ class OneClickBankingEntity
 
     /**
      * OneClickBankingEntity constructor.
-     * @param int $amount
+     * @param float $amount
      * @param string $order_code
      * @param int $payment_plan
-     * @param int $transaction_type
      * @param int $currency
      * @param CardOneClickEntity $cardOneClick
      */
-    public function __construct($amount, $order_code, $payment_plan,CardOneClickEntity $cardOneClick,$currency = CurrencyEnum::CURRENCY_BRAZIL)
+    public function __construct(
+        float $amount,
+        string $order_code,
+        int $payment_plan,
+        CardOneClickEntity $cardOneClick,
+        int $currency = CurrencyEnum::CURRENCY_BRAZIL
+    )
     {
         $this->order_code = $order_code;
         $this->payment_plan = $payment_plan;
@@ -61,15 +67,15 @@ class OneClickBankingEntity
     /**
      * @return int
      */
-    public function getAmount()
+    public function getAmount() : int
     {
         return $this->amount;
     }
 
     /**
-     * @param int $amount
+     * @param float $amount
      */
-    public function setAmountFormatCurrency($amount)
+    public function setAmountFormatCurrency(float $amount) : void
     {
         if ($this->currency == CurrencyEnum::CURRENCY_BRAZIL)
             $this->amount = Utilities::formatRealCurrencyValue($amount);
@@ -80,7 +86,7 @@ class OneClickBankingEntity
     /**
      * @return string
      */
-    public function getOrderCode()
+    public function getOrderCode() : string
     {
         return $this->order_code;
     }
@@ -88,7 +94,7 @@ class OneClickBankingEntity
     /**
      * @param string $order_code
      */
-    public function setOrderCode($order_code)
+    public function setOrderCode(string $order_code) : void
     {
         $this->order_code = $order_code;
     }
@@ -96,7 +102,7 @@ class OneClickBankingEntity
     /**
      * @return int
      */
-    public function getPaymentPlan()
+    public function getPaymentPlan() : int
     {
         return $this->payment_plan;
     }
@@ -104,23 +110,23 @@ class OneClickBankingEntity
     /**
      * @param int $payment_plan
      */
-    public function setPaymentPlan($payment_plan)
+    public function setPaymentPlan(int $payment_plan) : void
     {
         $this->payment_plan = $payment_plan;
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getTransactionType()
+    public function getTransactionType() : string
     {
         return $this->transaction_type;
     }
 
     /**
-     * @param int $transaction_type
+     * @param string $transaction_type
      */
-    public function setTransactionType($transaction_type)
+    public function setTransactionType(string $transaction_type) : void
     {
         $this->transaction_type = $transaction_type;
     }
@@ -128,7 +134,7 @@ class OneClickBankingEntity
     /**
      * @return int
      */
-    public function getCurrency()
+    public function getCurrency() : int
     {
         return $this->currency;
     }
@@ -136,7 +142,7 @@ class OneClickBankingEntity
     /**
      * @param int $currency
      */
-    public function setCurrency($currency)
+    public function setCurrency(int $currency) : void
     {
         $this->currency = $currency;
     }
@@ -144,7 +150,7 @@ class OneClickBankingEntity
     /**
      * @return CardOneClickEntity
      */
-    public function getCardOneClick()
+    public function getCardOneClick() : CardOneClickEntity
     {
         return $this->cardOneClick;
     }

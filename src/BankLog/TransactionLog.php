@@ -2,7 +2,7 @@
 
 namespace GlobalPayments\BankLog;
 
-use GlobalPayments\BankLog\entities\BankTransactionLog;
+use GlobalPayments\BankLog\Entity\BankTransactionLog;
 
 class TransactionLog
 {

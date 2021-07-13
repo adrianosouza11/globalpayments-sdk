@@ -1,7 +1,8 @@
 <?php
 
-namespace GlobalPayments\Entity;
+namespace GlobalPayments\Entity\Banking;
 
+use GlobalPayments\Entity\PaymentMethod\CardEntity;
 use GlobalPayments\Enum\CurrencyEnum;
 use GlobalPayments\Enum\TransactionTypeEnum;
 
@@ -14,14 +15,21 @@ class CardBanking3DSecurityEntity extends CardBankingEntity
 
     /**
      * CardBankingEntity constructor.
-     * @param int $amount
+     * @param float $amount
      * @param string $order_code
      * @param CardEntity $cardEntity
      * @param int $paymentPlan
      * @param array $arrayClientBrowse
      * @param int $currency
      */
-    public function __construct($amount, $order_code,CardEntity $cardEntity,$paymentPlan,array $arrayClientBrowse,$currency = CurrencyEnum::CURRENCY_BRAZIL)
+    public function __construct(
+        float $amount,
+        string $order_code,
+        CardEntity $cardEntity,
+        int $paymentPlan,
+        array $arrayClientBrowse,
+        int $currency = CurrencyEnum::CURRENCY_BRAZIL
+    )
     {
         parent::__construct($amount, $order_code, $cardEntity, $paymentPlan,$currency);
 
@@ -33,7 +41,8 @@ class CardBanking3DSecurityEntity extends CardBankingEntity
      * @param array $arrayClientBrowse
      * @return void
      */
-    public function setClientBrowse(array $arrayClientBrowse){
+    public function setClientBrowse(array $arrayClientBrowse) : void
+    {
         $this->clientBrowse = new \stdClass();
 
         if (!isset($arrayClientBrowse['user_agent'], $arrayClientBrowse['accept']))
@@ -47,7 +56,8 @@ class CardBanking3DSecurityEntity extends CardBankingEntity
     /**
      * @return array \stdClass $clientBrowse
      */
-    public function getClientBrowse(){
+    public function getClientBrowse() : array
+    {
         return $this->clientBrowse;
     }
 }

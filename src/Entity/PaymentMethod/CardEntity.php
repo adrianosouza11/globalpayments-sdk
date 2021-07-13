@@ -1,6 +1,6 @@
 <?php
 
-namespace GlobalPayments\Entity;
+namespace GlobalPayments\Entity\PaymentMethod;
 
 class CardEntity {
     /**
@@ -16,7 +16,7 @@ class CardEntity {
     /**
      * @var string
      */
-    protected $expirate_date = '';
+    protected $expiry_date = '';
 
     /**
      * @var string
@@ -27,14 +27,14 @@ class CardEntity {
      * CardEntity constructor.
      * @param string $titular_name
      * @param int $card_number
-     * @param string $expirate_date
+     * @param string $expiry_date
      * @param string $cvv2
      */
-    public function __construct($titular_name, $card_number, $expirate_date, $cvv2)
+    public function __construct(string $titular_name,int $card_number,string $expiry_date,string $cvv2=null)
     {
         $this->titular_name = $titular_name;
         $this->card_number = $card_number;
-        $this->expirate_date = $expirate_date;
+        $this->expiry_date = $expiry_date;
         $this->cvv2 = $cvv2;
     }
 
@@ -42,7 +42,7 @@ class CardEntity {
     /**
      * @return string
      */
-    public function getTitularName()
+    public function getTitularName() : string
     {
         return $this->titular_name;
     }
@@ -50,7 +50,7 @@ class CardEntity {
     /**
      * @param string $titular_name
      */
-    public function setTitularName($titular_name)
+    public function setTitularName(string $titular_name) : void
     {
         $this->titular_name = $titular_name;
     }
@@ -58,7 +58,7 @@ class CardEntity {
     /**
      * @return int
      */
-    public function getCardNumber()
+    public function getCardNumber() : int
     {
         return $this->card_number;
     }
@@ -66,7 +66,7 @@ class CardEntity {
     /**
      * @param int $card_number
      */
-    public function setCardNumber($card_number)
+    public function setCardNumber(int $card_number) : void
     {
         $this->card_number = $card_number;
     }
@@ -74,23 +74,23 @@ class CardEntity {
     /**
      * @return string
      */
-    public function getExpirateDate()
+    public function getExpiryDate() : string
     {
-        return $this->expirate_date;
+        return $this->expiry_date;
     }
 
     /**
-     * @param string $expirate_date
+     * @param string $expiry_date
      */
-    public function setExpirateDate($expirate_date)
+    public function setExpiryDate(string $expiry_date) : void
     {
-        $this->expirate_date = $expirate_date;
+        $this->expiry_date = $expiry_date;
     }
 
     /**
      * @return string
      */
-    public function getCvv2()
+    public function getCvv2() : ? string
     {
         return $this->cvv2;
     }
@@ -98,7 +98,7 @@ class CardEntity {
     /**
      * @param string $cvv2
      */
-    public function setCvv2($cvv2)
+    public function setCvv2(string $cvv2 = null) : void
     {
         $this->cvv2 = $cvv2;
     }
