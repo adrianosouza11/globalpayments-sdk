@@ -5,6 +5,7 @@ namespace GlobalPayments;
 use GlobalPayments\BankLog\Entity\BankTransactionLog;
 use GlobalPayments\BankLog\Enum\StatusLog;
 use GlobalPayments\BankLog\TransactionLog;
+use GlobalPayments\Entity\Banking\CancellationPayBankingEntity;
 use GlobalPayments\Entity\Banking\CardBankingEntity;
 use GlobalPayments\Entity\Banking\OneClickBankingEntity;
 use GlobalPayments\Exception\GlobalPaymentException;
@@ -157,6 +158,46 @@ class GlobalPaymentsServices
         $this->transactionLog->addLog(new BankTransactionLog(
             $cardBankingEntity->getOrderCode(),
             "Efetuando transação com cartão de crédito recorrente",
+            StatusLog::LOG,
+            $obfuscateDataXml
+        ));
+
+        return Client::doRequest($this->getUrl(),$getXml);
+    }
+
+    /**
+     * @param CancellationPayBankingEntity $cancellationPayBankingEntity
+     * @return array
+     * @throws GlobalPaymentException
+     */
+    public function cancelPaymentTransaction(CancellationPayBankingEntity $cancellationPayBankingEntity) : array
+    {
+        $security_key = Utilities::generateSecurityKey(
+            $cancellationPayBankingEntity->getAmount(),
+            $cancellationPayBankingEntity->getOrderCode(),
+            $this->getMid(),
+            $cancellationPayBankingEntity->getCurrency(),
+            null,
+            null,
+            $cancellationPayBankingEntity->getTransactionType(),
+            $this->getKey(),
+            null
+        );
+
+        $getXml = GlobalPaymentXml::getXmlCancellationPay(
+            $cancellationPayBankingEntity,
+            $this->getMid(),
+            $this->getTerminal(),
+            $security_key
+        );
+
+        $xmlReqArray = Utilities::xmlArray(new \SimpleXMLElement($getXml));
+
+        $obfuscateDataXml = Utilities::obfuscateDataXml($xmlReqArray,['DS_MERCHANT_MERCHANTSIGNATURE']);
+
+        $this->transactionLog->addLog(new BankTransactionLog(
+            $cancellationPayBankingEntity->getOrderCode(),
+            "Efetuando transação de cancalamento de pagamento",
             StatusLog::LOG,
             $obfuscateDataXml
         ));

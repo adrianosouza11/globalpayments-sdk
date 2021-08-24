@@ -2,6 +2,7 @@
 
 namespace GlobalPayments\Util;
 
+use GlobalPayments\Entity\Banking\CancellationPayBankingEntity;
 use GlobalPayments\Entity\Banking\CardBanking3DSecurityEntity;
 use GlobalPayments\Entity\Banking\CardBankingEntity;
 use GlobalPayments\Entity\Banking\OneClickBankingEntity;
@@ -183,5 +184,34 @@ abstract class GlobalPaymentXml
         );
 
         return $beginDatosentrada . $getXml . $xmlRequired . $endDatosentrada;
+    }
+
+    public static function getXmlCancellationPay(
+        CancellationPayBankingEntity $cancellationPayBankingEntity,
+        string $mid,
+        string $terminal,
+        string $security_key
+    ) : string
+    {
+        $beginDatosentrada = self::BEGIN_DATOSENTRADA;
+        $endDatosentrada = self::END_DATOSENTRADA;
+
+        $xmlRequired = sprintf("<DS_MERCHANT_AMOUNT>%d</DS_MERCHANT_AMOUNT>
+                            <DS_MERCHANT_ORDER>%s</DS_MERCHANT_ORDER>
+                            <DS_MERCHANT_MERCHANTCODE>%s</DS_MERCHANT_MERCHANTCODE>
+                            <DS_MERCHANT_CURRENCY>%s</DS_MERCHANT_CURRENCY>
+                            <DS_MERCHANT_TRANSACTIONTYPE>%s</DS_MERCHANT_TRANSACTIONTYPE>
+                            <DS_MERCHANT_TERMINAL>%s</DS_MERCHANT_TERMINAL>
+                            <DS_MERCHANT_MERCHANTSIGNATURE>%s</DS_MERCHANT_MERCHANTSIGNATURE>",
+            $cancellationPayBankingEntity->getAmount(),
+            $cancellationPayBankingEntity->getOrderCode(),
+            $mid,
+            $cancellationPayBankingEntity->getCurrency(),
+            $cancellationPayBankingEntity->getTransactionType(),
+            $terminal,
+            $security_key
+        );
+
+        return $beginDatosentrada . $xmlRequired . $endDatosentrada;
     }
 }
