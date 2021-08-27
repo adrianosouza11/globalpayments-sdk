@@ -5,7 +5,8 @@
     "require": {
         "econea/nusoap": "^0.9.10",
         "php" : "^7.3",
-        "ext-simplexml": "*"
+        "ext-simplexml": "*",
+        "ext-json": "*"
     },
     "require-dev": {
         "econea/nusoap": "^0.9.10",

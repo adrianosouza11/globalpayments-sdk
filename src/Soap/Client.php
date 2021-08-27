@@ -2,8 +2,8 @@
 
 namespace GlobalPayments\Soap;
 
+use GlobalPayments\Exception\ErrorHandler;
 use GlobalPayments\Exception\GlobalPaymentException;
-use GlobalPayments\Util\GlobalPaymentErrorCodes;
 use GlobalPayments\Util\Utilities;
 
 use \SimpleXMLElement;
@@ -17,19 +17,16 @@ class Client
      */
     public static function doRequest($url,$xml) : array
     {
-        $globalPaymentErrors = new GlobalPaymentErrorCodes();
+        $responseXml = self::nusoapRequest($url,$xml);
 
-        $response = self::nusoapRequest($url,$xml);
+        $responseArray = Utilities::xmlArray($responseXml);
 
-        $toArray = Utilities::xmlArray($response);
+       $errorHandler = new ErrorHandler($responseArray);
 
-        $sis_codigo = $toArray['CODIGO'];
+       $errorHandler->checkTransaction();
+       $errorHandler->checkOperationProcessing();
 
-        if ($sis_codigo != '0') {
-            $globalPaymentErrors->throwExceptionSisCode($sis_codigo);
-        }
-
-        return $toArray;
+        return $responseArray;
     }
 
     /**

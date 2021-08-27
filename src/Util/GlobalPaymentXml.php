@@ -73,7 +73,7 @@ abstract class GlobalPaymentXml
                             <DS_MERCHANT_TERMINAL>%s</DS_MERCHANT_TERMINAL>
                             <DS_MERCHANT_CURRENCY>%s</DS_MERCHANT_CURRENCY>
                             <DS_MERCHANT_PAN>%d</DS_MERCHANT_PAN>
-                            <DS_MERCHANT_EXPIRYDATE>%d</DS_MERCHANT_EXPIRYDATE>
+                            <DS_MERCHANT_EXPIRYDATE>%s</DS_MERCHANT_EXPIRYDATE>
                             <DS_MERCHANT_CVV2>%s</DS_MERCHANT_CVV2>
                             <DS_MERCHANT_TRANSACTIONTYPE>%s</DS_MERCHANT_TRANSACTIONTYPE>
                             <DS_MERCHANT_ACCOUNTTYPE>%s</DS_MERCHANT_ACCOUNTTYPE>

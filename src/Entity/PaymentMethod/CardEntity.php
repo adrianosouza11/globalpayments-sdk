@@ -28,7 +28,7 @@ class CardEntity {
      * @param string $titular_name
      * @param int $card_number
      * @param string $expiry_date
-     * @param string $cvv2
+     * @param string|null $cvv2
      */
     public function __construct(string $titular_name,int $card_number,string $expiry_date,string $cvv2=null)
     {
