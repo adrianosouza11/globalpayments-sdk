@@ -131,6 +131,9 @@ abstract class GlobalPaymentXml
 
         $getXml = self::getXmlCard($cardBankingEntity, $mid, $terminal);
 
+        if (!$cardBankingEntity->getCardEntity()->getCvv2())
+            $getXml = preg_replace('/<DS_MERCHANT_CVV2>(.*?)<\/DS_MERCHANT_CVV2>/im', '',$getXml);
+
         $xmlRequired = sprintf("<DS_MERCHANT_PLANINSTALLMENTSNUMBER>%d</DS_MERCHANT_PLANINSTALLMENTSNUMBER>
                             <DS_MERCHANT_IDENTIFIER>REQUIRED</DS_MERCHANT_IDENTIFIER>
                             <DS_MERCHANT_MERCHANTSIGNATURE>%s</DS_MERCHANT_MERCHANTSIGNATURE>",
