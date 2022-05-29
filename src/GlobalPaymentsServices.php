@@ -83,7 +83,20 @@ class GlobalPaymentsServices
             $obfuscateDataXml
         ));
 
-        return Client::doRequest($this->getUrl(),$getXml);
+        $doRequest = Client::doRequest($this->getUrl(),$getXml);
+
+        array_walk($doRequest['OPERACION'], function ($val, $key) use (&$result){
+            $result .= "<$key>$val</$key>";
+        });
+
+        $this->transactionLog->addLog(new BankTransactionLog(
+            $cardBankingEntity->getOrderCode(),
+            "Resultado da transação com cartão de crédito",
+            StatusLog::SUCCESS,
+            $result
+        ));
+
+        return $doRequest;
     }
 
     /**
