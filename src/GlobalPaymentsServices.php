@@ -86,6 +86,7 @@ class GlobalPaymentsServices
         $doRequest = Client::doRequest($this->getUrl(),$getXml);
 
         array_walk($doRequest['OPERACION'], function ($val, $key) use (&$result){
+            $val = is_array($val) ? implode(',', $val) : $val;
             $result .= "<$key>$val</$key>";
         });
 
